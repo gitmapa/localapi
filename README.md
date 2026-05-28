@@ -416,8 +416,13 @@ http://127.0.0.1:3000/v_cueanexos?limit=5
 # Estado actual
 
 ✅ FDW funcionando
+
 ✅ PostGIS funcionando
+
 ✅ Vistas API funcionando
+
 ✅ PostgREST funcionando
+
 ✅ Swagger UI funcionando
+
 ✅ OpenAPI generado automáticamente
