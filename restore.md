@@ -2,7 +2,6 @@
 
 Para restaurar los .dump, correr desde bash
 
-´´´
     pg_restore \
     -U postgres \
     -h localhost \
@@ -12,5 +11,5 @@ Para restaurar los .dump, correr desde bash
     --if-exists \
     --no-owner \
     --no-privileges \
-    -v "/c/temp/ranie.dump" 
-  ´´´
+    -v "/c/temp/ranie.dump"
+
