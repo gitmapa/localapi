@@ -1,0 +1,221 @@
+﻿Diagnose log at 2026-06-25T14:46:21Z
+
+AppPath: C:\Program Files\Git\mingw64\bin\git-credential-manager.exe
+InstallDir: C:\Program Files\Git\mingw64\bin\
+Version: 2.6.1+786ab03440ddc82e807a97c0e540f5247e44cec6
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Windows
+OSVersion: 10.0 (build 19045)
+Reading environment variables... OK
+ Variables:
+HOMEPATH=\Users\cristian.paez
+DriverData=C:\Windows\System32\Drivers\DriverData
+COMPUTERNAME=U7108
+MSYSTEM=MINGW64
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+POSTGIS_GDAL_ENABLED_DRIVERS=GTiff PNG JPEG GIF XYZ DTED USGSDEM AAIGrid
+OneDrive=C:\Users\cristian.paez\OneDrive
+ChocolateyLastPathUpdate=133280295461369236
+ProgramFiles(x86)=C:\Program Files (x86)
+CONFIG_SITE=C:/Program Files/Git/etc/config.site
+LC_CTYPE=es_ES.UTF-8
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 42 Stepping 7, GenuineIntel
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
+RTOOLS45_HOME=C:\rtools45
+ORIGINAL_TEMP=C:/Users/CRISTI~1.PAE/AppData/Local/Temp
+USERNAME=cristian.paez
+MINGW_PREFIX=C:/Program Files/Git/mingw64
+CURL_CA_BUNDLE=C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+GIT_EXEC_PATH=C:/Program Files/Git/mingw64/libexec/git-core
+ACLOCAL_PATH=C:\Program Files\Git\mingw64\share\aclocal;C:\Program Files\Git\usr\share\aclocal
+TEMP=C:\Users\CRISTI~1.PAE\AppData\Local\Temp
+LOCALAPPDATA=C:\Users\cristian.paez\AppData\Local
+MANPATH=C:\Program Files\Git\mingw64\local\man;C:\Program Files\Git\mingw64\share\man;C:\Program Files\Git\usr\local\man;C:\Program Files\Git\usr\share\man;C:\Program Files\Git\usr\man;C:\Program Files\Git\share\man
+SESSIONNAME=Console
+GDAL_DATA=C:\Program Files\PostgreSQL\16\gdal-data
+MSYSTEM_CARCH=x86_64
+PROGRAMFILES=C:\Program Files (x86)
+ProgramData=C:\ProgramData
+USERDNSDOMAIN=EDUCACION.LOCAL
+TERM_PROGRAM_VERSION=3.7.7
+ORIGINAL_TMP=C:/Users/CRISTI~1.PAE/AppData/Local/Temp
+PROCESSOR_REVISION=2a07
+SYSTEMROOT=C:\Windows
+TERM_PROGRAM=mintty
+PROCESSOR_LEVEL=6
+NUMBER_OF_PROCESSORS=4
+SSH_ASKPASS=C:/Program Files/Git/mingw64/bin/git-askpass.exe
+SHLVL=1
+APPDATA=C:\Users\cristian.paez\AppData\Roaming
+SYSTEMDRIVE=C:
+PROJ_LIB=C:\Program Files\PostgreSQL\16\share\contrib\postgis-3.5\proj
+PSModulePath=C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+PUBLIC=C:\Users\Public
+FPS_BROWSER_USER_PROFILE_STRING=Default
+PKG_CONFIG_PATH=C:\Program Files\Git\mingw64\lib\pkgconfig;C:\Program Files\Git\mingw64\share\pkgconfig
+USERDOMAIN_ROAMINGPROFILE=EDUCACION
+MSYSTEM_CHOST=x86_64-w64-mingw32
+TERM=xterm
+PLINK_PROTOCOL=ssh
+INFOPATH=C:\Program Files\Git\mingw64\local\info;C:\Program Files\Git\mingw64\share\info;C:\Program Files\Git\usr\local\info;C:\Program Files\Git\usr\share\info;C:\Program Files\Git\usr\info;C:\Program Files\Git\share\info
+ProgramW6432=C:\Program Files
+PATH=C:/Program Files/Git/mingw64/libexec/git-core;C:\Users\cristian.paez\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\cristian.paez\bin;C:\Python314\Scripts;C:\Python314;C:\Program Files\Python313\Scripts;C:\Program Files\Python313;C:\Users\cristian.paez\AppData\Roaming\Python\Python313\Scripts;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\xampp\php;C:\ProgramData\chocolatey\bin;C:\ProgramData\ComposerSetup\bin;C:\Program Files\PostgreSQL\16\bin;C:\Program Files\Git\cmd;C:\Program Files\PostgreSQL\16\bin;C:\Program Files\R\R-4.5.1\bin;C:\Program Files\nodejs;C:\Users\cristian.paez\AppData\Local\Microsoft\WindowsApps;C:\Users\cristian.paez\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\cristian.paez\AppData\Roaming\Composer\vendor\bin;C:\Users\cristian.paez\AppData\Roaming\npm;C:\Users\cristian.paez\AppData\Local\Programs\Warp\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+ChocolateyInstall=C:\ProgramData\chocolatey
+GIT_TRACE2_PARENT_SID=5994ac04-8f2e-4edf-a4e1-d4b575887fde
+FPS_BROWSER_APP_PROFILE_STRING=Internet Explorer
+USERDOMAIN=EDUCACION
+PKG_CONFIG_SYSTEM_LIBRARY_PATH=C:/Program Files/Git/mingw64/lib
+TMPDIR=C:\Users\CRISTI~1.PAE\AppData\Local\Temp
+TMP=C:\Users\CRISTI~1.PAE\AppData\Local\Temp
+SHELL=C:\Program Files\Git\usr\bin\bash.exe
+HOME=C:\Users\cristian.paez
+COMSPEC=C:\Windows\system32\cmd.exe
+LOGONSERVER=\\DCME-MSDC01
+USERPROFILE=C:\Users\cristian.paez
+DISPLAY=needs-to-be-defined
+COMMONPROGRAMFILES=C:\Program Files (x86)\Common Files
+WINDIR=C:\Windows
+POSTGIS_ENABLE_OUTDB_RASTERS=1
+AGSDESKTOPJAVA=C:\Program Files (x86)\ArcGIS\Desktop10.8\
+HOMEDRIVE=C:
+MSYSTEM_PREFIX=C:/Program Files/Git/mingw64
+OLDPWD=C:/xampp/htdocs/gitmapa
+MINGW_PACKAGE_PREFIX=mingw-w64-x86_64
+CommonProgramW6432=C:\Program Files\Common Files
+OPENSSL_CONF=C:\Program Files\PostgreSQL\psqlODBC\etc\openssl.cnf
+PWD=C:/xampp/htdocs/gitmapa/localapi
+EXEPATH=C:\Program Files\Git
+HOSTNAME=U7108
+PROCESSOR_ARCHITEW6432=AMD64
+ORIGINAL_PATH=C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\cristian.paez\bin;C:\Python314\Scripts;C:\Python314;C:\Program Files\Python313\Scripts;C:\Program Files\Python313;C:\Users\cristian.paez\AppData\Roaming\Python\Python313\Scripts;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\xampp\php;C:\ProgramData\chocolatey\bin;C:\ProgramData\ComposerSetup\bin;C:\Program Files\PostgreSQL\16\bin;C:\Program Files\Git\cmd;C:\Program Files\PostgreSQL\16\bin;C:\Program Files\R\R-4.5.1\bin;C:\Program Files\nodejs;C:\Users\cristian.paez\AppData\Local\Microsoft\WindowsApps;C:\Users\cristian.paez\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\cristian.paez\AppData\Roaming\Composer\vendor\bin;C:\Users\cristian.paez\AppData\Roaming\npm;C:\Users\cristian.paez\AppData\Local\Programs\Warp\bin
+PROCESSOR_ARCHITECTURE=x86
+PS1=\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ 
+OS=Windows_NT
+MINGW_CHOST=x86_64-w64-mingw32
+PKG_CONFIG_SYSTEM_INCLUDE_PATH=C:/Program Files/Git/mingw64/include
+_=C:/Program Files/Git/mingw64/bin/git
+ALLUSERSPROFILE=C:\ProgramData
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is 'C:\Users\cristian.paez\AppData\Local\Temp\'...
+Checking basic file I/O...
+Writing to temporary file 'C:\Users\cristian.paez\AppData\Local\Temp\62554de8a6436af3dec8775c'... OK
+Reading from temporary file 'C:\Users\cristian.paez\AppData\Local\Temp\62554de8a6436af3dec8775c'... OK
+Deleting temporary file 'C:\Users\cristian.paez\AppData\Local\Temp\62554de8a6436af3dec8775c'... OK
+Testing IFileSystem instance...
+UserHomePath: C:\Users\cristian.paez
+UserDataDirectoryPath: C:\Users\cristian.paez\.gcm
+GetCurrentDirectory(): C:\xampp\htdocs\gitmapa\localapi
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com...Sending HEAD request to https://example.com... OK
+ OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:62124/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.48.1.windows.1'
+Locating current repository...Git repository at 'C:/xampp/htdocs/gitmapa/localapi/.git'
+ OK
+Listing all Git configuration... OK
+Git configuration:
+file:C:/Program Files/Git/etc/gitconfig	diff.astextplain.textconv=astextplain
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.required=true
+file:C:/Program Files/Git/etc/gitconfig	http.sslbackend=schannel
+file:C:/Program Files/Git/etc/gitconfig	core.autocrlf=true
+file:C:/Program Files/Git/etc/gitconfig	core.fscache=true
+file:C:/Program Files/Git/etc/gitconfig	core.symlinks=false
+file:C:/Program Files/Git/etc/gitconfig	pull.rebase=false
+file:C:/Program Files/Git/etc/gitconfig	credential.helper=manager
+file:C:/Program Files/Git/etc/gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:C:/Program Files/Git/etc/gitconfig	init.defaultbranch=master
+file:C:/Users/cristian.paez/.gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Users/cristian.paez/.gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Users/cristian.paez/.gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Users/cristian.paez/.gitconfig	filter.lfs.required=true
+file:C:/Users/cristian.paez/.gitconfig	user.name=gitmapa
+file:C:/Users/cristian.paez/.gitconfig	user.email=cristian.paez@bue.edu.ar
+file:C:/Users/cristian.paez/.gitconfig	core.autocrlf=true
+file:C:/Users/cristian.paez/.gitconfig	credential.helper=manager
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=false
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	core.symlinks=false
+file:.git/config	core.ignorecase=true
+file:.git/config	remote.origin.url=https://github.com/gitmapa/localapi.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+file:.git/config	branch.main.remote=origin
+file:.git/config	branch.main.merge=refs/heads/main
+file:.git/config	branch.main.vscode-merge-base=origin/main
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: True
+Exception: None
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential... OK
+Reading test credential... OK
+Deleting test credential... OK
+
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker is not enabled.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: C:\Users\cristian.paez\AppData\Local\.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: C:\Users\cristian.paez\AppData\Local\.IdentityService\msal.cache
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+
