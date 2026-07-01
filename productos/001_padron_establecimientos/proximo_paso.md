@@ -11,147 +11,173 @@
 ## Infraestructura
 
 - PostgreSQL funcionando.
-- postgres_fdw configurado.
+- Foreign Data Wrapper (FDW) configurado.
 - PostgREST funcionando.
-- Swagger funcionando.
+- Swagger UI funcionando.
 - Repositorio documentado.
 
-## Producto
+## Producto 001
 
-Se encuentra definida la descripción conceptual del producto:
+Se encuentra definida la descripción conceptual del producto.
 
-**Padrón de Establecimientos Educativos**
+Documentación realizada:
 
-La documentación inicial ya fue creada.
-
----
-
-# Objetivo de la próxima etapa
-
-Antes de escribir la primera vista SQL se documentará completamente el producto.
-
-El objetivo es conocer el origen, significado y tratamiento de cada dato publicado.
-
-La implementación deberá surgir de esa documentación y no al revés.
+- README.md
+- metadatos.md
+- hallazgos.md
+- decisiones_modelo.md
 
 ---
 
-# Principio metodológico
+# Hallazgos principales
 
-En LocalAPI ningún producto se considera terminado si únicamente publica datos.
+Durante el análisis se identificaron los siguientes aspectos estructurales del producto.
 
-Todo producto deberá incluir:
+## Unidad educativa
 
-- documentación conceptual;
-- metadatos;
-- diccionario de datos;
-- modelo lógico;
-- implementación SQL;
-- endpoint;
-- aplicación de referencia.
+- CUE identifica un establecimiento educativo.
+- Un establecimiento puede poseer uno o más anexos.
 
-La documentación forma parte del producto.
+## Unidad de publicación
 
-No constituye documentación adicional.
+Cada registro representa un:
+
+**CUE + Anexo**
+
+(CUEANEXO)
+
+## Unidad edilicia
+
+El edificio se identifica mediante un:
+
+**CUI**
+
+Un edificio puede albergar varios establecimientos educativos.
+
+## Integración
+
+Se identificó el vínculo entre ambas fuentes.
+
+```
+padron_nacion.public.domicilio.cui
+```
+
+Este campo permite relacionar la identidad educativa con la identidad edilicia.
 
 ---
 
-# Trabajo a realizar
+# Decisiones de modelo adoptadas
 
-## 1. Analizar la publicación oficial
+## Fuente de verdad
 
-Tomar como referencia el archivo oficial publicado por UEICEE.
+La información publicada deberá respetar las responsabilidades institucionales.
 
-Analizar columna por columna.
-
-No escribir SQL.
+| Información | Fuente |
+|-------------|--------|
+| Identidad educativa | Padrón Nacional |
+| Dirección postal | Padrón Nacional |
+| Coordenadas | UEICEE |
+| Barrio | UEICEE |
+| Comuna | UEICEE |
+| Distrito Escolar | UEICEE |
 
 ---
 
-## 2. Construir los metadatos
+## Principio de integración
 
-Definir la información descriptiva del producto.
+LocalAPI integra información.
 
-Como mínimo:
+No duplica procesos de administración.
+
+Cada dato debe mantenerse únicamente en el sistema responsable de su actualización.
+
+---
+
+# Próxima etapa
+
+A partir del próximo encuentro comenzará el diseño del modelo lógico del Producto 001.
+
+El objetivo consiste en reconstruir completamente el proceso de generación de la publicación oficial.
+
+No se implementará directamente una consulta SQL.
+
+Primero se comprenderá completamente el modelo de información.
+
+---
+
+# Trabajo pendiente
+
+## 1. Completar la consulta de origen
+
+Finalizar el relevamiento de la consulta utilizada actualmente para generar la publicación institucional.
+
+El objetivo no consiste en reutilizar dicha consulta.
+
+Su objetivo es comprender:
+
+- tablas utilizadas;
+- relaciones;
+- reglas de integración;
+- campos calculados;
+- transformaciones.
+
+---
+
+## 2. Construir el diccionario de datos
+
+Para cada variable publicada documentar:
 
 - nombre;
 - descripción;
-- organismo responsable;
-- área responsable;
-- frecuencia de actualización;
-- frecuencia de publicación;
-- unidad de publicación;
-- cobertura geográfica;
-- formato(s) de publicación;
-- licencia;
-- versión;
-- fecha de creación;
-- fecha de actualización;
-- fuente(s) de información;
-- observaciones metodológicas.
-
-Este documento permitirá comprender el producto sin necesidad de conocer la implementación.
-
----
-
-## 3. Construir el diccionario de datos
-
-Para cada campo publicado documentar:
-
-- nombre del campo;
-- descripción;
 - tipo de dato;
-- dominio o catálogo (si corresponde);
-- fuente oficial;
+- dominio;
+- fuente institucional;
 - tabla de origen;
 - campo de origen;
 - transformación aplicada;
 - observaciones.
 
-No importa todavía cómo se implementará.
-
-Importa conocer exactamente de dónde proviene cada dato.
+La hoja metodológica incluida en la publicación oficial constituye el punto de partida de este trabajo.
 
 ---
 
-## 4. Detectar reglas de integración
+## 3. Diseñar el modelo lógico
 
-Durante la construcción del diccionario identificar:
+Definir:
 
-- joins necesarios;
+- entidades;
+- relaciones;
 - prioridades entre fuentes;
-- reglas de resolución de conflictos;
-- campos calculados;
-- campos derivados;
-- reglas metodológicas propias de MAPA.
+- reglas de integración;
+- atributos heredados;
+- campos calculados.
 
-Estas reglas formarán parte del modelo lógico.
+Todavía no se desarrollará SQL.
 
 ---
 
-## Resultado esperado
+## 4. Implementar la vista
 
-Al finalizar esta etapa deberá ser posible responder, para cualquier columna publicada:
+Una vez validado el modelo lógico comenzará la implementación de:
 
-- qué significa;
-- quién es responsable del dato;
-- de dónde proviene;
-- cómo se obtiene;
-- por qué forma parte del producto.
+```
+api.v_padron_establecimientos
+```
 
-Una vez completado este trabajo comenzará la implementación SQL.
+Esta vista constituirá la base del primer endpoint desarrollado mediante LocalAPI.
+
+---
+
+# Objetivo inmediato
+
+Obtener una vista integrada que reproduzca íntegramente la publicación oficial del Padrón de Establecimientos Educativos utilizando exclusivamente el modelo de información construido para LocalAPI.
 
 ---
 
 # Regla de trabajo
 
-Todavía no se desarrollarán:
+El Producto 001 constituye el producto piloto del laboratorio.
 
-- vistas;
-- endpoints;
-- consultas SQL;
-- aplicación PHP.
+Las decisiones metodológicas adoptadas durante su desarrollo servirán como patrón para los futuros productos construidos mediante LocalAPI.
 
-La prioridad absoluta es comprender completamente el producto antes de implementarlo.
-
-El Producto 001 será el patrón metodológico que utilizarán los futuros productos desarrollados mediante LocalAPI.
+No se desarrollarán nuevos productos hasta completar íntegramente el Producto 001.
