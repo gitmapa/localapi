@@ -202,6 +202,22 @@ El resultado del trabajo constituye una referencia técnica para la Dirección d
 
 ---
 
+## No duplicar responsabilidades
+
+LocalAPI integra información.
+
+No reemplaza los procesos de administración de datos existentes.
+
+Cada conjunto de información debe mantenerse únicamente en el sistema responsable de su administración.
+
+Cuando una fuente institucional administra correctamente un dato, LocalAPI debe consumirlo desde dicha fuente y evitar cualquier duplicación de carga o mantenimiento.
+
+Este principio reduce el riesgo de inconsistencias, elimina tareas redundantes y permite que cada área continúe siendo responsable de la calidad de su propia información.
+
+El modelo de información de LocalAPI integra estas fuentes para construir productos institucionales sin replicar sus procesos de gestión.
+
+---
+
 # Evolución
 
 Cada nuevo proyecto desarrollado mediante LocalAPI amplía el conocimiento acumulado del laboratorio.
