@@ -4,210 +4,156 @@
 
 ---
 
-# Estado general
+# Estado actual
 
-El Producto 001 ya completó su etapa de análisis y diseño.
+La etapa de análisis y diseño del Producto 001 se encuentra finalizada.
 
-La infraestructura de LocalAPI también se encuentra finalizada.
+Se encuentran documentados:
 
-A partir de este punto el trabajo consiste exclusivamente en implementar el producto documentado.
-
----
-
-# Estado de la documentación
-
-## Documentación general
-
-| Documento | Estado |
-|-----------|--------|
-| README | ✔ |
-| Introducción | ✔ |
-| Arquitectura | ✔ |
-| Instalación | ✔ |
-| PostgREST | ✔ |
-| Swagger | ✔ |
-| Seguridad | ✔ |
-| Endpoints | ✔ |
-| Desarrollo | ✔ |
-| Roadmap | ✔ |
-
----
-
-## Documentación del Producto 001
-
-| Documento | Estado |
-|-----------|--------|
-| README | ✔ |
-| Metadatos | ✔ |
-| Hallazgos | ✔ |
-| Decisiones de modelo | ✔ |
-| Diccionario de datos | ✔ |
-| Modelo lógico | ✔ |
-| Vista SQL | ⏳ |
-| Endpoint | ⏳ |
-| Aplicación | ⏳ |
-| Snapshots | ⏳ |
-
----
-
-# Estado del diseño
-
-## Definido
-
-- Objetivo del producto.
-- Alcance.
-- Unidad de publicación.
-- Modelo conceptual.
-- Fuentes de verdad.
-- Dominios funcionales.
+- Objetivo.
+- Metadatos.
 - Hallazgos.
 - Decisiones de modelo.
 - Diccionario de datos.
+- Modelo lógico.
+- Diseño de la vista SQL.
+- Diseño del endpoint.
 
-No deberían aparecer nuevas decisiones conceptuales durante la implementación.
+La infraestructura de LocalAPI también se encuentra completamente operativa.
 
----
-
-# Implementación inmediata
-
-La siguiente etapa consiste en construir la implementación del modelo.
-
-Orden de trabajo:
-
-1. Vista SQL.
-2. Validación contra la publicación oficial.
-3. Endpoint REST.
-4. Aplicación consumidora.
-5. Snapshots.
+A partir de este punto comienza la etapa de implementación.
 
 ---
 
-# Vista SQL
+# Objetivo inmediato
 
-Objetivo:
+Implementar el **Producto 001 – Padrón de Establecimientos Educativos** respetando íntegramente el modelo de información documentado.
 
-Construir una vista que reproduzca exactamente el contenido publicado por el Padrón de Establecimientos Educativos.
-
-La vista deberá respetar íntegramente:
-
-- el modelo lógico;
-- el diccionario de datos;
-- las fuentes de verdad;
-- las transformaciones documentadas.
+La implementación no debe introducir nuevas decisiones funcionales.
 
 ---
 
-# Validación
+# Plan de trabajo
 
-Una vez implementada la vista SQL deberá compararse contra la publicación oficial.
+## Etapa 1 — Vista SQL
 
-La validación comprenderá:
+Construir la vista:
+
+```
+api.padron_establecimientos
+```
+
+utilizando como referencia:
+
+- modelo lógico;
+- diccionario de datos;
+- fuentes de verdad;
+- transformaciones documentadas.
+
+La vista deberá publicar exactamente las columnas definidas para el Producto 001.
+
+---
+
+## Etapa 2 — Validación
+
+Comparar la vista contra la publicación oficial.
+
+Validar:
 
 - cantidad de registros;
-- estructura;
-- columnas;
+- cantidad de columnas;
+- nombres;
+- orden;
 - contenido;
 - transformaciones.
 
-El objetivo consiste en garantizar que el producto reproduce exactamente la publicación institucional.
+El objetivo consiste en obtener un resultado idéntico al padrón oficial.
 
 ---
 
-# Endpoint
+## Etapa 3 — Publicación
 
-Una vez validada la vista SQL se publicará mediante PostgREST.
+Publicar la vista mediante PostgREST.
 
-No deberán desarrollarse componentes adicionales.
+Verificar:
 
-La infraestructura ya se encuentra disponible.
+- filtros;
+- ordenamientos;
+- consultas;
+- documentación Swagger.
 
 ---
 
-# Aplicación de referencia
+## Etapa 4 — Aplicación de referencia
 
-La aplicación tendrá como objetivo demostrar el consumo del producto.
+Desarrollar una aplicación mínima para demostrar el consumo del producto.
 
-El MVP contempla una interfaz extremadamente simple con dos pestañas.
+El MVP contempla dos secciones:
 
-## Padrón
+### Padrón
 
-Permitirá:
+- consulta;
+- filtros;
+- descarga.
 
-- consultar;
-- filtrar;
-- ordenar;
-- descargar.
+### Mapa
 
-## Mapa
-
-Permitirá visualizar geográficamente los registros publicados utilizando las coordenadas integradas por el producto.
+- visualización geográfica;
+- navegación sobre los establecimientos.
 
 La aplicación constituye una demostración del producto y no un sistema de gestión.
 
 ---
 
-# Snapshots
+## Etapa 5 — Snapshots
 
-El producto deberá permitir conservar publicaciones históricas del padrón.
+Definir e implementar el mecanismo para conservar publicaciones históricas del padrón.
 
-Cada snapshot representará una versión oficial correspondiente a una fecha determinada.
-
-Inicialmente se prevé conservar las publicaciones de:
-
-- Marzo.
-- Noviembre.
-
-El mecanismo de implementación será definido una vez concluida la vista SQL.
+Cada snapshot representará una publicación oficial correspondiente a una fecha determinada.
 
 ---
 
-# MVP
+# Organización del trabajo
 
-El Producto 001 se considerará terminado cuando un usuario pueda abrir un navegador y:
+La documentación funcional del producto permanece dentro de:
 
-- consultar el padrón;
+```
+productos/
+001_padron_establecimientos/
+```
+
+La implementación técnica comenzará en:
+
+```
+sql/
+001_padron_establecimientos/
+```
+
+Se prevé crear inicialmente los siguientes archivos:
+
+```
+01_vista_padron_establecimientos.sql
+02_validacion_excel.sql
+```
+
+La documentación y la implementación evolucionarán de forma coordinada.
+
+---
+
+# Criterios de finalización del MVP
+
+El Producto 001 se considerará finalizado cuando un usuario pueda:
+
+- consultar el padrón desde un navegador;
 - filtrar registros;
 - descargar la información;
-- consumir el producto mediante API;
-- visualizar el padrón sobre un mapa.
+- consumir el producto mediante API REST;
+- visualizar los establecimientos sobre un mapa.
 
 ---
 
-# Lo que NO forma parte del MVP
+# Próximo paso
 
-Para mantener el alcance controlado, el MVP no incluye:
+El siguiente hito del proyecto consiste en construir la primera versión de la vista SQL del Producto 001 y validar que reproduce exactamente la publicación oficial.
 
-- Docker.
-- Kubernetes.
-- OAuth.
-- CI/CD.
-- Autenticación avanzada.
-- Nuevos productos.
-
-Estas capacidades podrán evaluarse una vez validado el Producto 001.
-
----
-
-# Productos posteriores
-
-Una vez concluido el Producto 001, la metodología desarrollada permitirá construir nuevos productos reutilizando prácticamente toda la infraestructura y gran parte del modelo documental.
-
-El candidato natural para continuar el laboratorio será el:
-
-**Producto 002 – Padrón de Ofertas Educativas.**
-
-Este producto reutilizará:
-
-- la infraestructura;
-- la metodología;
-- la arquitectura documental;
-- el modelo de integración;
-- gran parte de las fuentes de información utilizadas por el Producto 001.
-
----
-
-# Estado actual
-
-La etapa de arquitectura del Producto 001 puede considerarse finalizada.
-
-El próximo hito del proyecto consiste en implementar y validar la vista SQL que materializará el modelo de información documentado.
+Una vez alcanzado ese objetivo comenzará la etapa de publicación y desarrollo de la aplicación de referencia.
