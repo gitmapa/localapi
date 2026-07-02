@@ -12,33 +12,32 @@
 | Nombre | Padrón de Establecimientos Educativos |
 | Estado | En desarrollo (MVP) |
 | Versión | 1.0 |
-| Fecha de creación | Pendiente |
-| Última actualización | Pendiente |
+| Organismo responsable | UEICEE |
+| Desarrollo e integración | MAPA |
+| Plataforma | LocalAPI |
 
 ---
 
 # Descripción
 
-El Padrón de Establecimientos Educativos constituye la publicación oficial del listado de establecimientos educativos de la Ciudad.
+El Padrón de Establecimientos Educativos constituye el producto institucional que integra la información necesaria para identificar, localizar y consultar los establecimientos educativos de la Ciudad Autónoma de Buenos Aires.
 
-Integra información proveniente de distintas fuentes institucionales para ofrecer una representación única, consistente y reutilizable de cada establecimiento educativo y sus localizaciones.
+Su construcción combina información proveniente de distintas fuentes institucionales, respetando las responsabilidades de cada organismo y publicando un modelo de información único, consistente y reutilizable.
+
+Este producto constituye el primer MVP desarrollado sobre la infraestructura LocalAPI.
 
 ---
 
 # Objetivo
 
-Producir una única publicación institucional que concentre la información necesaria para identificar, localizar y consultar los establecimientos educativos de la Ciudad.
+Construir una única publicación institucional que concentre la información necesaria para:
 
-El producto constituye la referencia oficial utilizada por la UEICEE y sirve como base para publicaciones, consultas, análisis y futuras aplicaciones.
-
----
-
-# Responsable
-
-| Campo | Valor |
-|-------|-------|
-| Organismo responsable | UEICEE |
-| Desarrollo e integración | MAPA |
+- identificar establecimientos educativos;
+- localizar sedes y anexos;
+- consultar información territorial;
+- publicar datos mediante API;
+- exportar información en distintos formatos;
+- servir como base para aplicaciones institucionales.
 
 ---
 
@@ -48,48 +47,76 @@ El producto constituye la referencia oficial utilizada por la UEICEE y sirve com
 |-------|-------|
 | Jurisdicción | Ciudad Autónoma de Buenos Aires |
 | Cobertura temática | Establecimientos educativos |
-| Cobertura espacial | Toda la Ciudad |
+| Cobertura espacial | Toda la Ciudad Autónoma de Buenos Aires |
+| Unidad de publicación | CUEANEXO |
 
 ---
 
 # Unidad de publicación
 
-Cada registro representa una **localización de un establecimiento educativo**, identificada por la combinación:
+Cada registro representa una localización (sede o anexo) de un establecimiento educativo.
+
+La unidad de publicación se identifica mediante:
 
 - CUE
 - Anexo
 
-y enriquecida con la información edilicia correspondiente (CUI).
+cuya combinación constituye el identificador **CUEANEXO**.
+
+Cada registro se encuentra enriquecido con la información edilicia correspondiente al edificio (CUI) donde funciona dicha localización.
 
 ---
 
 # Fuentes de información
 
-| Fuente | Finalidad |
-|---------|-----------|
-| Padrón Nacional | Identidad educativa del establecimiento |
-| UEICEE | Información edilicia y geográfica |
+| Dominio | Fuente de verdad |
+|---------|------------------|
+| Identidad educativa | Padrón Nacional |
+| Dirección postal | Padrón Nacional |
+| Información territorial | UEICEE |
+| Información geográfica | UEICEE |
+
+LocalAPI integra estas fuentes sin reemplazar los procesos de administración de datos existentes.
 
 ---
 
-# Actualización
+# Frecuencia de actualización
 
-La incorporación de información proveniente de las fuentes no posee una frecuencia fija.
+El modelo integrado puede actualizarse cada vez que se dispone de una nueva versión de alguna de las fuentes institucionales.
 
-Las actualizaciones se realizan cada vez que se dispone de una nueva versión de las bases de origen.
+No existe una frecuencia técnica obligatoria.
+
+La actualización depende exclusivamente de la disponibilidad de nuevas versiones de las bases de origen.
 
 ---
 
-# Publicación
+# Publicación oficial
 
-La publicación oficial del producto se realiza **dos veces por año**, mediante cortes institucionales.
+La publicación institucional del padrón se realiza mediante cortes oficiales.
 
-Meses previstos:
+Actualmente se prevén dos publicaciones por año:
 
 - Marzo
 - Noviembre
 
-Cada publicación constituye una fotografía oficial del padrón correspondiente a esa fecha.
+Cada publicación constituye una versión oficial del padrón correspondiente a una fecha determinada.
+
+---
+
+# Snapshots
+
+Además de la versión vigente, el producto contempla la conservación de publicaciones históricas.
+
+Cada snapshot representa una fotografía completa del producto en una fecha determinada.
+
+Los snapshots permiten:
+
+- reproducir publicaciones oficiales;
+- comparar versiones del padrón;
+- garantizar trazabilidad;
+- respaldar informes e indicadores históricos.
+
+Los snapshots forman parte del producto y no constituyen copias de respaldo de las bases de datos.
 
 ---
 
@@ -97,16 +124,18 @@ Cada publicación constituye una fotografía oficial del padrón correspondiente
 
 El producto se encuentra orientado a:
 
-- áreas internas de la UEICEE;
+- áreas técnicas de la UEICEE;
+- áreas de gestión;
 - ciudadanía;
 - desarrolladores;
-- procesos de integración de información.
+- aplicaciones institucionales;
+- procesos de integración.
 
 ---
 
 # Formatos de publicación
 
-El mismo producto podrá publicarse mediante distintos formatos.
+El mismo modelo de información podrá publicarse mediante distintos formatos.
 
 - API REST
 - JSON
@@ -114,19 +143,25 @@ El mismo producto podrá publicarse mediante distintos formatos.
 - XLSX
 - GeoJSON
 
-Todos ellos representan el mismo modelo de información.
+Todos representan exactamente el mismo producto.
+
+La diferencia radica únicamente en el mecanismo de consumo.
 
 ---
 
 # Productos derivados
 
-A partir del Padrón de Establecimientos Educativos podrán desarrollarse, entre otros:
+A partir del Producto 001 podrán desarrollarse, entre otros:
 
-- mapas;
-- aplicaciones web;
+- visor web del padrón;
+- mapas institucionales;
 - consultas por establecimiento;
+- consultas por edificio;
+- exportaciones temáticas;
 - indicadores;
 - publicaciones estadísticas.
+
+Todos estos recursos consumirán el mismo modelo de información.
 
 ---
 
@@ -138,11 +173,13 @@ Pendiente de definición institucional.
 
 # Observaciones metodológicas
 
-El producto integra información proveniente de múltiples sistemas institucionales.
+El Producto 001 integra información proveniente de múltiples sistemas institucionales.
 
-La implementación mediante LocalAPI desacopla la publicación oficial de los sistemas de origen, permitiendo reconstruir el producto a partir de un modelo de información único, documentado y reutilizable.
+Cada atributo conserva una única fuente de verdad y permanece bajo la responsabilidad del organismo que lo administra.
 
-Las publicaciones semestrales constituyen versiones oficiales del padrón y deberán preservarse como cortes históricos para garantizar la trazabilidad de la información y la reproducibilidad de análisis e informes.
+LocalAPI documenta el modelo de información, implementa su integración y publica el producto mediante distintos mecanismos, sin modificar las bases de origen.
+
+El desarrollo del Producto 001 constituye la validación de la metodología propuesta por LocalAPI para la construcción de productos institucionales reutilizables.
 
 ---
 
@@ -152,8 +189,25 @@ Las publicaciones semestrales constituyen versiones oficiales del padrón y debe
 |--------|--------|
 | Definición conceptual | ✔ Finalizada |
 | Metadatos | ✔ Finalizada |
-| Diccionario de datos | Pendiente |
-| Modelo lógico | Pendiente |
-| Vista SQL | Pendiente |
+| Hallazgos | ✔ Finalizada |
+| Decisiones de modelo | ✔ Finalizada |
+| Diccionario de datos | ✔ Finalizada |
+| Modelo lógico | ✔ Finalizada |
+| Vista SQL | En desarrollo |
 | Endpoint | Pendiente |
 | Aplicación de referencia | Pendiente |
+| Snapshots | Pendiente |
+
+---
+
+# Estado esperado del MVP
+
+El Producto 001 se considerará finalizado cuando permita:
+
+- consultar el padrón mediante API;
+- filtrar información;
+- descargar el padrón en distintos formatos;
+- visualizar los establecimientos sobre un mapa;
+- conservar publicaciones históricas mediante snapshots oficiales.
+
+En ese momento quedará demostrado el ciclo completo de construcción de un producto institucional utilizando LocalAPI.

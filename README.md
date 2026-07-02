@@ -1,6 +1,6 @@
 # LocalAPI
 
-> Proyecto desarrollado por **MAPA (UEICEE) + IA**
+> Laboratorio para diseñar, integrar y publicar productos de información.
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?logo=postgresql)
 ![PostGIS](https://img.shields.io/badge/PostGIS-enabled-green)
@@ -13,13 +13,72 @@
 
 # ¿Qué es LocalAPI?
 
-LocalAPI es un laboratorio para integrar, modelar y publicar información proveniente de múltiples bases de datos PostgreSQL.
+LocalAPI es un laboratorio desarrollado por **MAPA (UEICEE)** para integrar información proveniente de múltiples bases PostgreSQL, construir modelos de información y publicarlos mediante APIs REST.
 
-Su objetivo es construir rápidamente APIs funcionales que permitan validar requerimientos, demostrar su utilidad mediante un MVP y reducir la incertidumbre técnica antes de una implementación institucional.
+Su objetivo no es desarrollar APIs por sí mismas.
 
-El proyecto no desarrolla aplicaciones.
+Su objetivo es construir **productos de información institucionales**, documentados, reutilizables y desacoplados de los sistemas que administran los datos.
 
-Desarrolla **modelos de información** que posteriormente pueden ser consumidos desde aplicaciones web, sistemas institucionales, herramientas SIG o cualquier cliente compatible con HTTP.
+La API constituye uno de los mecanismos de publicación de dichos productos.
+
+---
+
+# Objetivos
+
+LocalAPI busca demostrar que es posible construir productos institucionales completos mediante una arquitectura simple basada en PostgreSQL.
+
+Cada producto debe poder:
+
+- integrar información proveniente de distintas fuentes;
+- documentar claramente su modelo de información;
+- publicarse mediante una API REST;
+- consumirse desde aplicaciones web;
+- exportarse en distintos formatos;
+- evolucionar sin modificar las bases de origen.
+
+---
+
+# Principios
+
+## El producto precede a la implementación
+
+El desarrollo comienza comprendiendo el problema que debe resolverse.
+
+La implementación técnica surge posteriormente como consecuencia del modelo diseñado.
+
+---
+
+## El modelo precede a la API
+
+La API refleja el modelo de información.
+
+No lo define.
+
+---
+
+## Una única fuente de verdad
+
+Cada atributo publicado posee un único sistema responsable de su administración.
+
+LocalAPI integra información.
+
+No reemplaza procesos de carga.
+
+---
+
+## No duplicar responsabilidades
+
+Cada organismo continúa siendo responsable de la información que administra.
+
+LocalAPI reutiliza esas fuentes para construir productos institucionales integrados.
+
+---
+
+## La documentación forma parte del producto
+
+Cada producto posee documentación propia.
+
+El modelo de información debe poder comprenderse independientemente de la implementación SQL.
 
 ---
 
@@ -54,6 +113,86 @@ Desarrolla **modelos de información** que posteriormente pueden ser consumidos 
                  Aplicaciones cliente
 ```
 
+La arquitectura permanece estable.
+
+Lo que evoluciona son los modelos de información construidos sobre ella.
+
+---
+
+# Método de trabajo
+
+Todo producto desarrollado mediante LocalAPI sigue el mismo proceso.
+
+```
+Necesidad
+
+↓
+
+Producto
+
+↓
+
+Modelo lógico
+
+↓
+
+Diccionario de datos
+
+↓
+
+Vista SQL
+
+↓
+
+Endpoint
+
+↓
+
+Aplicación consumidora
+
+↓
+
+Validación contra la publicación oficial
+```
+
+La implementación constituye la última etapa del proceso.
+
+---
+
+# Productos
+
+Cada necesidad da origen a un producto independiente.
+
+Actualmente el laboratorio desarrolla:
+
+| Código | Producto | Estado |
+|---------|----------|--------|
+| 001 | Padrón de Establecimientos Educativos | En desarrollo |
+
+Cada producto posee su propia documentación metodológica, modelo lógico, vista SQL, endpoint y aplicación de referencia.
+
+---
+
+# Infraestructura
+
+La implementación actual utiliza:
+
+- PostgreSQL
+- PostGIS
+- PostgreSQL Foreign Data Wrapper (FDW)
+- PostgREST
+- Swagger UI
+- Python (servidor HTTP local)
+
+No requiere:
+
+- Docker
+- Kubernetes
+- OAuth
+- CI/CD
+
+El objetivo del laboratorio es validar productos institucionales mediante un MVP funcional.
+
 ---
 
 # Estructura del repositorio
@@ -75,6 +214,9 @@ localapi/
 │   ├── 08_desarrollo.md
 │   └── 09_roadmap.md
 │
+├── productos/
+│   └── 001_padron_establecimientos/
+│
 ├── sql/
 │
 └── restore.md
@@ -82,140 +224,48 @@ localapi/
 
 ---
 
-# Instalación rápida
-
-La infraestructura utilizada por el proyecto está compuesta por:
-
-- PostgreSQL
-- PostGIS
-- PostgreSQL Foreign Data Wrapper (FDW)
-- PostgREST
-- Swagger UI
-- Python (servidor HTTP local)
-
-La guía completa de instalación se encuentra en:
-
-```
-docs/03_instalacion.md
-```
-
----
-
-# Levantar el laboratorio
-
-## 1. Verificar PostgreSQL
-
-Confirmar que PostgreSQL se encuentre iniciado y que exista la base:
-
-```
-ranie_dev
-```
-
----
-
-## 2. Iniciar PostgREST
-
-Abrir una ventana de **Símbolo del sistema (CMD)**.
-
-Ir a:
-
-```cmd
-cd C:\postgrest
-```
-
-Ejecutar:
-
-```cmd
-postgrest.exe ranie_dev.conf
-```
-
-No cerrar la ventana.
-
----
-
-## 3. Verificar la API
-
-Abrir el navegador.
-
-```
-http://127.0.0.1:3000/
-```
-
-Debe visualizarse el documento OpenAPI generado automáticamente.
-
-También puede verificarse un recurso, por ejemplo:
-
-```
-http://127.0.0.1:3000/v_cui?limit=5
-```
-
----
-
-## 4. Iniciar Swagger UI
-
-Abrir una segunda ventana de **CMD**.
-
-Ir a:
-
-```cmd
-cd C:\postgrest\swagger-ui
-```
-
-Ejecutar:
-
-```cmd
-python -m http.server 8080
-```
-
----
-
-## 5. Abrir Swagger
-
-```
-http://127.0.0.1:8080
-```
-
-Swagger detectará automáticamente todos los endpoints publicados por PostgREST.
-
----
-
 # Documentación
 
-| Documento | Contenido |
-|-----------|-----------|
-| `01_introduccion.md` | Objetivos y alcance del proyecto |
-| `02_arquitectura.md` | Arquitectura general de LocalAPI |
-| `03_instalacion.md` | Instalación completa del entorno |
-| `04_postgrest.md` | Publicación automática de APIs |
-| `05_swagger.md` | Exploración y validación mediante Swagger UI |
-| `06_seguridad.md` | Modelo de seguridad y publicación |
-| `07_endpoints.md` | Diseño de recursos REST |
-| `08_desarrollo.md` | Metodología de desarrollo de MAPA |
-| `09_roadmap.md` | Evolución prevista del proyecto |
+La documentación del proyecto se divide en dos niveles.
+
+## Documentación general
+
+Describe la infraestructura y la metodología de LocalAPI.
+
+## Documentación por producto
+
+Cada producto documenta:
+
+- objetivo;
+- metadatos;
+- hallazgos;
+- decisiones de modelo;
+- diccionario de datos;
+- modelo lógico;
+- vista SQL;
+- endpoint;
+- aplicación de referencia.
 
 ---
 
 # Estado actual
 
-La implementación actual permite:
+La infraestructura del laboratorio se encuentra finalizada.
 
-- integrar múltiples bases PostgreSQL;
-- construir modelos de información mediante vistas SQL;
-- publicar automáticamente APIs REST;
-- generar documentación OpenAPI;
-- validar recursos mediante Swagger UI.
+Actualmente el trabajo se concentra en el desarrollo del **Producto 001 – Padrón de Establecimientos Educativos**, cuyo objetivo es demostrar el ciclo completo de construcción de un producto institucional:
 
-La primera implementación se desarrolló utilizando información del dominio RANIE, aunque la arquitectura fue diseñada para incorporar nuevos dominios de información sin modificar el modelo general.
+- integración de datos;
+- modelo de información;
+- publicación mediante API;
+- aplicación consumidora;
+- validación contra la publicación oficial.
 
 ---
 
 # Filosofía
 
-En LocalAPI:
+LocalAPI no desarrolla APIs.
 
-- el modelo de información es el producto;
-- la API es una consecuencia del modelo;
-- la documentación se genera automáticamente;
-- las aplicaciones consumen la API, nunca la base de datos.
+LocalAPI desarrolla productos de información.
 
-Cada MVP construido mediante LocalAPI busca responder una pregunta concreta, demostrar la viabilidad de una solución y servir como base para futuros desarrollos.
+La API es solamente uno de los formatos mediante los cuales esos productos pueden publicarse y reutilizarse.

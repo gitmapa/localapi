@@ -1,183 +1,213 @@
-# Próximo paso
+# Próximos pasos
 
-> Documento transitorio de trabajo.
->
-> Objetivo: retomar el desarrollo del Producto 001 exactamente desde el punto donde quedó.
+> Producto desarrollado por **MAPA (UEICEE) + IA**
+
+---
+
+# Estado general
+
+El Producto 001 ya completó su etapa de análisis y diseño.
+
+La infraestructura de LocalAPI también se encuentra finalizada.
+
+A partir de este punto el trabajo consiste exclusivamente en implementar el producto documentado.
+
+---
+
+# Estado de la documentación
+
+## Documentación general
+
+| Documento | Estado |
+|-----------|--------|
+| README | ✔ |
+| Introducción | ✔ |
+| Arquitectura | ✔ |
+| Instalación | ✔ |
+| PostgREST | ✔ |
+| Swagger | ✔ |
+| Seguridad | ✔ |
+| Endpoints | ✔ |
+| Desarrollo | ✔ |
+| Roadmap | ✔ |
+
+---
+
+## Documentación del Producto 001
+
+| Documento | Estado |
+|-----------|--------|
+| README | ✔ |
+| Metadatos | ✔ |
+| Hallazgos | ✔ |
+| Decisiones de modelo | ✔ |
+| Diccionario de datos | ✔ |
+| Modelo lógico | ✔ |
+| Vista SQL | ⏳ |
+| Endpoint | ⏳ |
+| Aplicación | ⏳ |
+| Snapshots | ⏳ |
+
+---
+
+# Estado del diseño
+
+## Definido
+
+- Objetivo del producto.
+- Alcance.
+- Unidad de publicación.
+- Modelo conceptual.
+- Fuentes de verdad.
+- Dominios funcionales.
+- Hallazgos.
+- Decisiones de modelo.
+- Diccionario de datos.
+
+No deberían aparecer nuevas decisiones conceptuales durante la implementación.
+
+---
+
+# Implementación inmediata
+
+La siguiente etapa consiste en construir la implementación del modelo.
+
+Orden de trabajo:
+
+1. Vista SQL.
+2. Validación contra la publicación oficial.
+3. Endpoint REST.
+4. Aplicación consumidora.
+5. Snapshots.
+
+---
+
+# Vista SQL
+
+Objetivo:
+
+Construir una vista que reproduzca exactamente el contenido publicado por el Padrón de Establecimientos Educativos.
+
+La vista deberá respetar íntegramente:
+
+- el modelo lógico;
+- el diccionario de datos;
+- las fuentes de verdad;
+- las transformaciones documentadas.
+
+---
+
+# Validación
+
+Una vez implementada la vista SQL deberá compararse contra la publicación oficial.
+
+La validación comprenderá:
+
+- cantidad de registros;
+- estructura;
+- columnas;
+- contenido;
+- transformaciones.
+
+El objetivo consiste en garantizar que el producto reproduce exactamente la publicación institucional.
+
+---
+
+# Endpoint
+
+Una vez validada la vista SQL se publicará mediante PostgREST.
+
+No deberán desarrollarse componentes adicionales.
+
+La infraestructura ya se encuentra disponible.
+
+---
+
+# Aplicación de referencia
+
+La aplicación tendrá como objetivo demostrar el consumo del producto.
+
+El MVP contempla una interfaz extremadamente simple con dos pestañas.
+
+## Padrón
+
+Permitirá:
+
+- consultar;
+- filtrar;
+- ordenar;
+- descargar.
+
+## Mapa
+
+Permitirá visualizar geográficamente los registros publicados utilizando las coordenadas integradas por el producto.
+
+La aplicación constituye una demostración del producto y no un sistema de gestión.
+
+---
+
+# Snapshots
+
+El producto deberá permitir conservar publicaciones históricas del padrón.
+
+Cada snapshot representará una versión oficial correspondiente a una fecha determinada.
+
+Inicialmente se prevé conservar las publicaciones de:
+
+- Marzo.
+- Noviembre.
+
+El mecanismo de implementación será definido una vez concluida la vista SQL.
+
+---
+
+# MVP
+
+El Producto 001 se considerará terminado cuando un usuario pueda abrir un navegador y:
+
+- consultar el padrón;
+- filtrar registros;
+- descargar la información;
+- consumir el producto mediante API;
+- visualizar el padrón sobre un mapa.
+
+---
+
+# Lo que NO forma parte del MVP
+
+Para mantener el alcance controlado, el MVP no incluye:
+
+- Docker.
+- Kubernetes.
+- OAuth.
+- CI/CD.
+- Autenticación avanzada.
+- Nuevos productos.
+
+Estas capacidades podrán evaluarse una vez validado el Producto 001.
+
+---
+
+# Productos posteriores
+
+Una vez concluido el Producto 001, la metodología desarrollada permitirá construir nuevos productos reutilizando prácticamente toda la infraestructura y gran parte del modelo documental.
+
+El candidato natural para continuar el laboratorio será el:
+
+**Producto 002 – Padrón de Ofertas Educativas.**
+
+Este producto reutilizará:
+
+- la infraestructura;
+- la metodología;
+- la arquitectura documental;
+- el modelo de integración;
+- gran parte de las fuentes de información utilizadas por el Producto 001.
 
 ---
 
 # Estado actual
 
-## Infraestructura
+La etapa de arquitectura del Producto 001 puede considerarse finalizada.
 
-- PostgreSQL funcionando.
-- Foreign Data Wrapper (FDW) configurado.
-- PostgREST funcionando.
-- Swagger UI funcionando.
-- Repositorio documentado.
-
-## Producto 001
-
-Se encuentra definida la descripción conceptual del producto.
-
-Documentación realizada:
-
-- README.md
-- metadatos.md
-- hallazgos.md
-- decisiones_modelo.md
-
----
-
-# Hallazgos principales
-
-Durante el análisis se identificaron los siguientes aspectos estructurales del producto.
-
-## Unidad educativa
-
-- CUE identifica un establecimiento educativo.
-- Un establecimiento puede poseer uno o más anexos.
-
-## Unidad de publicación
-
-Cada registro representa un:
-
-**CUE + Anexo**
-
-(CUEANEXO)
-
-## Unidad edilicia
-
-El edificio se identifica mediante un:
-
-**CUI**
-
-Un edificio puede albergar varios establecimientos educativos.
-
-## Integración
-
-Se identificó el vínculo entre ambas fuentes.
-
-```
-padron_nacion.public.domicilio.cui
-```
-
-Este campo permite relacionar la identidad educativa con la identidad edilicia.
-
----
-
-# Decisiones de modelo adoptadas
-
-## Fuente de verdad
-
-La información publicada deberá respetar las responsabilidades institucionales.
-
-| Información | Fuente |
-|-------------|--------|
-| Identidad educativa | Padrón Nacional |
-| Dirección postal | Padrón Nacional |
-| Coordenadas | UEICEE |
-| Barrio | UEICEE |
-| Comuna | UEICEE |
-| Distrito Escolar | UEICEE |
-
----
-
-## Principio de integración
-
-LocalAPI integra información.
-
-No duplica procesos de administración.
-
-Cada dato debe mantenerse únicamente en el sistema responsable de su actualización.
-
----
-
-# Próxima etapa
-
-A partir del próximo encuentro comenzará el diseño del modelo lógico del Producto 001.
-
-El objetivo consiste en reconstruir completamente el proceso de generación de la publicación oficial.
-
-No se implementará directamente una consulta SQL.
-
-Primero se comprenderá completamente el modelo de información.
-
----
-
-# Trabajo pendiente
-
-## 1. Completar la consulta de origen
-
-Finalizar el relevamiento de la consulta utilizada actualmente para generar la publicación institucional.
-
-El objetivo no consiste en reutilizar dicha consulta.
-
-Su objetivo es comprender:
-
-- tablas utilizadas;
-- relaciones;
-- reglas de integración;
-- campos calculados;
-- transformaciones.
-
----
-
-## 2. Construir el diccionario de datos
-
-Para cada variable publicada documentar:
-
-- nombre;
-- descripción;
-- tipo de dato;
-- dominio;
-- fuente institucional;
-- tabla de origen;
-- campo de origen;
-- transformación aplicada;
-- observaciones.
-
-La hoja metodológica incluida en la publicación oficial constituye el punto de partida de este trabajo.
-
----
-
-## 3. Diseñar el modelo lógico
-
-Definir:
-
-- entidades;
-- relaciones;
-- prioridades entre fuentes;
-- reglas de integración;
-- atributos heredados;
-- campos calculados.
-
-Todavía no se desarrollará SQL.
-
----
-
-## 4. Implementar la vista
-
-Una vez validado el modelo lógico comenzará la implementación de:
-
-```
-api.v_padron_establecimientos
-```
-
-Esta vista constituirá la base del primer endpoint desarrollado mediante LocalAPI.
-
----
-
-# Objetivo inmediato
-
-Obtener una vista integrada que reproduzca íntegramente la publicación oficial del Padrón de Establecimientos Educativos utilizando exclusivamente el modelo de información construido para LocalAPI.
-
----
-
-# Regla de trabajo
-
-El Producto 001 constituye el producto piloto del laboratorio.
-
-Las decisiones metodológicas adoptadas durante su desarrollo servirán como patrón para los futuros productos construidos mediante LocalAPI.
-
-No se desarrollarán nuevos productos hasta completar íntegramente el Producto 001.
+El próximo hito del proyecto consiste en implementar y validar la vista SQL que materializará el modelo de información documentado.

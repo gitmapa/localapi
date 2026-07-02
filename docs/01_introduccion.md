@@ -2,120 +2,181 @@
 
 > Proyecto desarrollado por **MAPA (UEICEE) + IA**
 
-## ¿Qué es LocalAPI?
+---
 
-LocalAPI es un laboratorio de integración y publicación de datos desarrollado en UEICEE para construir rápidamente APIs funcionales sobre PostgreSQL.
+# ¿Por qué existe LocalAPI?
 
-Su objetivo es validar requerimientos, demostrar su utilidad y entregar a la Dirección de Sistemas un MVP completamente operativo que sirva como referencia para una implementación productiva.
+En los organismos públicos la información suele encontrarse distribuida entre múltiples sistemas, desarrollados por distintas áreas y con responsabilidades específicas.
 
-El proyecto no busca reemplazar el desarrollo institucional. Busca reducir la incertidumbre técnica antes de iniciar ese desarrollo.
+Cada uno de estos sistemas administra correctamente su propio dominio de información, pero los productos institucionales que utilizan los usuarios suelen requerir integrar datos provenientes de varias fuentes.
+
+Tradicionalmente esta integración se resuelve mediante:
+
+- consultas SQL complejas;
+- exportaciones a planillas de cálculo;
+- procesos manuales de consolidación;
+- desarrollos específicos para cada aplicación.
+
+Estos mecanismos suelen ser difíciles de mantener, difíciles de documentar y poco reutilizables.
+
+LocalAPI surge para abordar ese problema.
 
 ---
 
-# Objetivos
+# ¿Qué es LocalAPI?
 
-LocalAPI persigue cuatro objetivos principales.
+LocalAPI es un laboratorio para diseñar, integrar y publicar productos de información institucionales.
 
-## 1. Integrar fuentes de datos
+Su objetivo consiste en transformar información distribuida en distintos sistemas en productos documentados, reutilizables y fácilmente consumibles por personas y aplicaciones.
 
-Permitir consultar información proveniente de múltiples bases institucionales sin modificar las bases originales.
-
-Cada fuente continúa siendo administrada por su responsable.
+Para ello utiliza una arquitectura basada en PostgreSQL, PostgreSQL Foreign Data Wrapper (FDW) y PostgREST, evitando desarrollar capas adicionales de software cuando no son necesarias.
 
 ---
 
-## 2. Construir un modelo de información
+# Qué problema resuelve
 
-La integración no consiste únicamente en unir tablas.
+LocalAPI desacopla los productos institucionales de los sistemas que administran los datos.
 
-El objetivo es construir vistas que representen información útil para responder necesidades concretas de los usuarios.
+En lugar de construir aplicaciones que consultan directamente múltiples bases de datos, LocalAPI integra esas fuentes mediante un modelo de información único y publica dicho modelo como un producto reutilizable.
 
-La lógica de integración vive en SQL.
+De esta manera:
 
----
-
-## 3. Publicar APIs rápidamente
-
-Una vez construido un modelo de información consistente, las vistas son publicadas automáticamente como endpoints REST mediante PostgREST.
-
-Esto permite disponer de una API funcional sin desarrollar un backend específico.
+- cada organismo continúa administrando sus propios datos;
+- las responsabilidades institucionales permanecen claramente definidas;
+- los consumidores acceden a un único modelo de información consistente.
 
 ---
 
-## 4. Validar requerimientos
+# Qué no es LocalAPI
 
-Antes de solicitar desarrollos productivos a la Dirección de Sistemas, LocalAPI permite responder preguntas como:
+LocalAPI no reemplaza los sistemas institucionales existentes.
 
-- ¿La información existe?
-- ¿Puede integrarse?
-- ¿Qué campos deberían publicarse?
-- ¿Qué estructura debería tener la API?
-- ¿Qué utilidad aporta al usuario?
+Tampoco administra información propia.
 
-Cuando esas respuestas ya fueron validadas mediante un MVP funcional, el desarrollo institucional comienza con mucha menor incertidumbre.
+Su función consiste exclusivamente en:
 
----
+- integrar información;
+- construir modelos de información;
+- publicar productos institucionales.
 
-# Filosofía del proyecto
-
-LocalAPI se apoya sobre algunos principios simples.
-
-## Las bases fuente no se modifican
-
-Toda integración se realiza desde una base independiente mediante PostgreSQL Foreign Data Wrapper (FDW).
+La administración y actualización de los datos continúa siendo responsabilidad de cada sistema de origen.
 
 ---
 
-## La lógica pertenece a la base de datos
+# Filosofía
 
-La transformación, normalización e integración de los datos se implementan mediante vistas SQL.
+El desarrollo en LocalAPI parte de una necesidad concreta.
 
-No se replica lógica de negocio en aplicaciones cliente.
+No comienza escribiendo consultas SQL.
 
----
+No comienza diseñando endpoints.
 
-## La API es una consecuencia del modelo de información
+No comienza desarrollando aplicaciones.
 
-Primero se diseña el modelo.
+El proceso comienza identificando qué producto necesita el usuario.
 
-Después se publica la API.
+A partir de esa necesidad se construye un modelo de información que posteriormente podrá publicarse mediante distintos mecanismos.
 
-Nunca al revés.
-
----
-
-## Las aplicaciones consumen la API
-
-Las aplicaciones cliente no acceden directamente a las bases de datos.
-
-Toda consulta debe realizarse utilizando los endpoints publicados por LocalAPI.
-
-Esto desacopla las aplicaciones de las estructuras internas de cada base institucional.
+La API constituye uno de ellos.
 
 ---
 
-# Alcance
+# Principios
 
-LocalAPI no es una aplicación.
+El laboratorio se apoya sobre algunos principios fundamentales.
 
-LocalAPI no es un sistema de gestión.
+## Una única fuente de verdad
 
-LocalAPI no reemplaza a un backend institucional.
-
-LocalAPI constituye una infraestructura de integración, experimentación y publicación de datos que permite construir prototipos funcionales con muy bajo costo de desarrollo.
+Cada atributo publicado posee un único sistema responsable de su administración.
 
 ---
 
-# Estado actual
+## No duplicar responsabilidades
 
-Actualmente el proyecto integra información proveniente de distintas bases institucionales utilizando PostgreSQL, PostGIS, PostgreSQL Foreign Data Wrapper (FDW), PostgREST y Swagger UI.
+LocalAPI reutiliza la información administrada por otros sistemas.
 
-La primera implementación se desarrolló sobre datos de RANIE, pero la arquitectura fue diseñada para incorporar nuevas fuentes de información sin modificar el modelo general.
+No replica procesos de carga ni genera nuevas responsabilidades de mantenimiento.
 
 ---
 
-# Evolución esperada
+## El modelo precede a la implementación
 
-La infraestructura podrá utilizarse para construir nuevas APIs sobre diferentes dominios de información, manteniendo siempre la misma arquitectura de integración y publicación.
+Antes de escribir una vista SQL es necesario comprender completamente el producto que se desea construir.
 
-Las aplicaciones que consuman estas APIs constituirán proyectos independientes de LocalAPI.
+El modelo lógico constituye el verdadero diseño del producto.
+
+---
+
+## La API es una consecuencia
+
+Una vez construido el modelo de información, la publicación mediante PostgREST resulta inmediata.
+
+La API no constituye el objetivo del proyecto.
+
+Constituye uno de sus mecanismos de publicación.
+
+---
+
+# Método
+
+Todos los productos desarrollados mediante LocalAPI siguen el mismo proceso.
+
+```
+Necesidad
+
+↓
+
+Producto
+
+↓
+
+Modelo lógico
+
+↓
+
+Diccionario de datos
+
+↓
+
+Vista SQL
+
+↓
+
+Endpoint
+
+↓
+
+Aplicación consumidora
+
+↓
+
+Validación contra publicación oficial
+```
+
+Cada etapa documenta decisiones que serán reutilizadas por los productos posteriores.
+
+---
+
+# MVP
+
+La estrategia de desarrollo se basa en la construcción de Productos Mínimos Viables (MVP).
+
+Cada MVP debe demostrar que una necesidad institucional puede resolverse mediante un modelo de información claro, documentado y reutilizable.
+
+El primer MVP desarrollado en LocalAPI corresponde al:
+
+**Producto 001 – Padrón de Establecimientos Educativos.**
+
+Su objetivo consiste en demostrar el ciclo completo de construcción de un producto institucional, desde la integración de datos hasta una aplicación consumidora.
+
+---
+
+# Evolución
+
+Una vez consolidado el primer producto, la misma metodología podrá aplicarse para construir nuevos productos de información.
+
+La infraestructura permanecerá estable.
+
+Lo que evolucionará serán los modelos de información construidos sobre ella.
+
+De esta manera, cada nuevo producto ampliará el conocimiento acumulado por el laboratorio sin modificar los principios que dieron origen a LocalAPI.

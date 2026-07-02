@@ -6,228 +6,336 @@
 
 # Objetivo
 
-LocalAPI constituye una metodología para diseñar, validar y publicar modelos de información antes de su implementación institucional.
+LocalAPI constituye una metodología para diseñar, construir y publicar productos de información institucionales.
 
 El objetivo del desarrollo no consiste en construir APIs.
 
-El objetivo consiste en construir modelos de información que resuelvan necesidades concretas de los usuarios.
+El objetivo consiste en comprender un problema, diseñar un modelo de información que lo resuelva y publicarlo mediante una arquitectura simple, documentada y reutilizable.
 
-La API es una consecuencia de ese proceso.
+La API representa únicamente uno de los mecanismos de publicación de dicho modelo.
 
 ---
 
 # Filosofía
 
-En LocalAPI el desarrollo comienza con una pregunta.
+Todo desarrollo comienza con una necesidad concreta.
 
-Nunca comienza con una tabla.
+Nunca comienza con:
 
-Nunca comienza con una tecnología.
-
-Nunca comienza con un endpoint.
+- una consulta SQL;
+- una tabla;
+- una tecnología;
+- un endpoint;
+- una aplicación.
 
 La primera pregunta siempre es:
 
-> ¿Qué información necesita el usuario?
+> **¿Qué producto necesita el usuario?**
 
-A partir de esa respuesta comienza el diseño.
+A partir de esa respuesta comienza todo el proceso de diseño.
+
+---
+
+# El producto como unidad de trabajo
+
+En LocalAPI el desarrollo se organiza alrededor de productos de información.
+
+Cada producto representa una necesidad institucional concreta y posee:
+
+- un objetivo;
+- una unidad de publicación;
+- un modelo lógico;
+- un diccionario de datos;
+- una implementación SQL;
+- uno o más mecanismos de publicación.
+
+El producto constituye la verdadera unidad de desarrollo.
 
 ---
 
 # Método de trabajo
 
-Cada desarrollo sigue el mismo recorrido.
+Todos los productos desarrollados mediante LocalAPI siguen el mismo recorrido.
 
-## 1. Identificar una necesidad
+## 1. Identificar la necesidad
 
-Existe un requerimiento funcional.
+Todo desarrollo comienza con una necesidad funcional.
 
 Por ejemplo:
 
+- publicar un padrón;
+- integrar información;
 - localizar establecimientos;
-- descargar un padrón;
-- visualizar información sobre un mapa;
-- integrar información proveniente de distintas bases.
+- construir un mapa;
+- ofrecer una API.
 
-El requerimiento siempre pertenece al usuario.
+La necesidad pertenece al usuario.
 
 Nunca pertenece a la tecnología.
 
 ---
 
-## 2. Identificar las fuentes
+## 2. Definir el producto
 
-Se analizan las bases institucionales disponibles.
+La necesidad se transforma en un producto de información.
 
-Se determina:
+En esta etapa se responde:
 
-- qué información existe;
-- qué información falta;
-- qué relaciones pueden establecerse;
-- qué limitaciones presentan las fuentes.
+- ¿qué problema resuelve?
+- ¿quién lo utilizará?
+- ¿qué información publicará?
+- ¿qué información no publicará?
+- ¿cuál será su unidad de publicación?
 
----
-
-## 3. Construir el modelo de información
-
-La etapa más importante del proceso.
-
-Aquí se decide:
-
-- qué información publicar;
-- cómo integrarla;
-- cómo nombrarla;
-- qué complejidad ocultar;
-- qué reglas aplicar.
-
-El resultado es una o más vistas SQL.
-
-El modelo de información constituye el verdadero producto del desarrollo.
+Una buena definición del producto evita rediseños posteriores.
 
 ---
 
-## 4. Publicar la API
+## 3. Identificar las fuentes de verdad
 
-Una vez validado el modelo de información, la publicación resulta inmediata mediante PostgREST.
+Se analizan las fuentes institucionales disponibles.
 
-No se desarrolla un backend específico.
+Para cada atributo se determina:
 
-La infraestructura transforma automáticamente las vistas en recursos REST.
+- quién lo administra;
+- cuál es su fuente de verdad;
+- cuál es su nivel de actualización;
+- si requiere integración con otras fuentes.
 
----
-
-## 5. Validar
-
-El nuevo recurso se prueba utilizando Swagger UI.
-
-Se verifica:
-
-- estructura;
-- nombres;
-- filtros;
-- resultados;
-- utilidad.
-
-Si el modelo requiere modificaciones, se ajusta la vista SQL.
+Uno de los principios fundamentales de LocalAPI establece que cada atributo posee una única fuente de verdad.
 
 ---
 
-## 6. Construir aplicaciones cliente
+## 4. Comprender el dominio
 
-Una vez estabilizada la API pueden desarrollarse aplicaciones consumidoras.
+Antes de implementar cualquier consulta se estudia el dominio de información.
 
-Estas aplicaciones nunca acceden directamente a PostgreSQL.
+Durante esta etapa se documentan:
 
-Toda interacción ocurre mediante la API.
+- hallazgos;
+- relaciones;
+- restricciones;
+- responsabilidades institucionales;
+- reglas de negocio.
+
+El objetivo consiste en comprender completamente el problema antes de comenzar la implementación.
+
+---
+
+## 5. Diseñar el modelo lógico
+
+Una vez comprendido el dominio se construye el modelo lógico.
+
+Aquí se definen:
+
+- entidades;
+- relaciones;
+- atributos;
+- herencias;
+- transformaciones;
+- dominios funcionales.
+
+El modelo lógico constituye el verdadero diseño del producto.
+
+---
+
+## 6. Construir el diccionario de datos
+
+Cada atributo publicado debe quedar documentado.
+
+Como mínimo se registra:
+
+- nombre;
+- descripción;
+- fuente;
+- obligatoriedad;
+- observaciones.
+
+El diccionario constituye el contrato funcional del producto.
+
+---
+
+## 7. Implementar la vista SQL
+
+Recién cuando el producto se encuentra completamente definido comienza la implementación.
+
+La vista SQL traduce el modelo lógico a una implementación concreta dentro de PostgreSQL.
+
+No introduce nuevas decisiones funcionales.
+
+Su única responsabilidad consiste en materializar el modelo previamente documentado.
+
+---
+
+## 8. Validar
+
+El resultado obtenido se compara contra la publicación institucional vigente.
+
+La publicación oficial constituye el mecanismo de validación del producto.
+
+No constituye la definición del modelo.
+
+Las diferencias detectadas permiten:
+
+- corregir errores;
+- completar atributos;
+- ajustar reglas de integración.
+
+---
+
+## 9. Publicar
+
+Una vez validada la vista SQL el producto puede publicarse mediante distintos mecanismos.
+
+Entre ellos:
+
+- API REST;
+- JSON;
+- CSV;
+- XLSX;
+- GeoJSON.
+
+Todos representan exactamente el mismo modelo de información.
+
+---
+
+## 10. Construir aplicaciones consumidoras
+
+Las aplicaciones no consultan directamente las bases de datos.
+
+Consumen exclusivamente los productos publicados por LocalAPI.
+
+De esta forma:
+
+- se desacopla la implementación;
+- se reutiliza el mismo modelo;
+- se evita duplicar lógica de integración.
 
 ---
 
 # Principios de diseño
 
+## El producto precede al SQL
+
+Las consultas SQL implementan decisiones previamente documentadas.
+
+Nunca definen el producto.
+
 ---
 
 ## El modelo precede a la API
 
-Nunca se diseña una API antes de comprender el problema.
+Los endpoints representan modelos de información.
 
-La API refleja el modelo.
+No representan tablas.
 
-No lo reemplaza.
+No representan consultas.
 
----
-
-## Publicar datos es una decisión de diseño
-
-La existencia de una tabla no implica que deba existir un endpoint.
-
-Cada recurso publicado representa una decisión consciente sobre qué información resulta útil para los consumidores de la API.
-
-Publicar información constituye una decisión de diseño, no una consecuencia técnica.
+No representan estructuras internas de las bases.
 
 ---
 
-## Las bases pertenecen a sus responsables
+## Una única fuente de verdad
 
-LocalAPI únicamente los integra.
+Cada atributo publicado posee un único responsable institucional.
 
-Nunca modifica información de origen.
+LocalAPI integra esa información.
 
----
-
-## La complejidad permanece dentro de LocalAPI
-
-Las aplicaciones cliente no necesitan conocer:
-
-- estructuras internas;
-- relaciones complejas;
-- procesos de integración;
-- normalizaciones;
-- inconsistencias históricas.
-
-Todo ello permanece encapsulado dentro del modelo de información.
-
----
-
-## Los MVP reducen incertidumbre
-
-El propósito principal de LocalAPI consiste en construir prototipos funcionales.
-
-Estos prototipos permiten responder preguntas antes de iniciar desarrollos institucionales.
-
-Por ejemplo:
-
-- ¿La integración es posible?
-- ¿La información resulta útil?
-- ¿Qué campos deberían publicarse?
-- ¿Qué consultas realizarán los usuarios?
-- ¿Qué volumen de información se intercambiará?
-
-Cuando estas preguntas ya poseen respuesta, la implementación institucional puede concentrarse en aspectos propios de una solución productiva.
-
----
-
-# Rol de MAPA
-
-MAPA actúa como laboratorio de integración y experimentación.
-
-Su función consiste en:
-
-- analizar requerimientos;
-- comprender las fuentes de información;
-- construir modelos;
-- validar soluciones;
-- demostrar su utilidad mediante MVP funcionales.
-
-El resultado del trabajo constituye una referencia técnica para la Dirección de Sistemas.
+No la administra.
 
 ---
 
 ## No duplicar responsabilidades
 
-LocalAPI integra información.
+Cada organismo continúa siendo responsable de los datos que administra.
 
-No reemplaza los procesos de administración de datos existentes.
+LocalAPI reutiliza esas fuentes para construir productos institucionales.
 
-Cada conjunto de información debe mantenerse únicamente en el sistema responsable de su administración.
+---
 
-Cuando una fuente institucional administra correctamente un dato, LocalAPI debe consumirlo desde dicha fuente y evitar cualquier duplicación de carga o mantenimiento.
+## La documentación forma parte del desarrollo
 
-Este principio reduce el riesgo de inconsistencias, elimina tareas redundantes y permite que cada área continúe siendo responsable de la calidad de su propia información.
+Todo conocimiento adquirido durante el análisis debe quedar documentado.
 
-El modelo de información de LocalAPI integra estas fuentes para construir productos institucionales sin replicar sus procesos de gestión.
+Entre otros:
+
+- hallazgos;
+- decisiones;
+- modelos;
+- diccionarios;
+- transformaciones.
+
+La documentación constituye parte del producto.
+
+No un complemento.
+
+---
+
+## El Excel valida, no diseña
+
+Las publicaciones institucionales existentes constituyen una referencia de validación.
+
+El diseño del producto surge del análisis del dominio de información y no de la estructura de una planilla.
+
+---
+
+## El MVP reduce incertidumbre
+
+Cada Producto Mínimo Viable tiene como objetivo responder preguntas antes de iniciar un desarrollo institucional.
+
+Un MVP debe demostrar:
+
+- que la integración es posible;
+- que el modelo resulta útil;
+- que la documentación es suficiente;
+- que la arquitectura es adecuada.
+
+Una vez respondidas esas preguntas, el desarrollo institucional puede concentrarse en aspectos operativos.
+
+---
+
+# Rol de MAPA
+
+MAPA actúa como laboratorio de integración y diseño de productos de información.
+
+Su función consiste en:
+
+- comprender problemas;
+- analizar fuentes;
+- integrar información;
+- diseñar modelos;
+- validar resultados;
+- construir MVP.
+
+El laboratorio no reemplaza a los sistemas existentes.
+
+Construye productos que reutilizan la información administrada por dichos sistemas.
 
 ---
 
 # Evolución
 
-Cada nuevo proyecto desarrollado mediante LocalAPI amplía el conocimiento acumulado del laboratorio.
+Cada nuevo producto incrementa el conocimiento acumulado por LocalAPI.
 
 La infraestructura permanece estable.
 
-Lo que evoluciona son los modelos de información construidos sobre ella.
+La metodología permanece estable.
+
+Lo que evoluciona son los modelos de información construidos sobre ellas.
+
+De esta manera, cada nuevo desarrollo reduce el esfuerzo necesario para construir los siguientes.
 
 ---
 
 # Resultado esperado
 
-Cada MVP desarrollado mediante LocalAPI debe demostrar que un requerimiento puede resolverse, cómo debería resolverse y cuál es el valor que aporta a los usuarios antes de iniciar su desarrollo institucional.
+Todo producto desarrollado mediante LocalAPI debe permitir que un usuario pueda consumir información institucional sin conocer:
+
+- dónde se almacenan los datos;
+- cuántas bases intervienen;
+- cómo se integran;
+- qué transformaciones fueron necesarias.
+
+El usuario accede únicamente a un producto consistente, documentado y reutilizable.
+
+Ese constituye el objetivo principal de LocalAPI.

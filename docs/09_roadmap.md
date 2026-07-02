@@ -6,128 +6,182 @@
 
 # Objetivo
 
-Este documento identifica posibles líneas de evolución para LocalAPI.
+Este documento describe la evolución prevista de LocalAPI.
 
-No constituye un cronograma de desarrollo.
+El roadmap no representa únicamente un cronograma de desarrollo.
 
-Representa una visión de crecimiento de la infraestructura a medida que se incorporen nuevos proyectos, nuevas fuentes de información y nuevos consumidores.
+Representa la evolución del laboratorio mediante la construcción progresiva de productos de información reutilizables.
 
 ---
 
 # Estado actual
 
-Actualmente LocalAPI permite:
+La infraestructura de LocalAPI se encuentra finalizada.
 
-- integrar múltiples bases PostgreSQL;
-- construir modelos de información mediante vistas SQL;
-- publicar automáticamente APIs REST;
-- generar documentación OpenAPI;
-- validar recursos utilizando Swagger UI.
+Actualmente el laboratorio dispone de:
 
-La primera implementación se desarrolló sobre información proveniente del dominio RANIE.
+- PostgreSQL;
+- PostgreSQL Foreign Data Wrapper (FDW);
+- PostGIS;
+- PostgREST;
+- Swagger UI;
+- repositorio documentado;
+- metodología de desarrollo.
 
----
-
-# Evolución de las fuentes
-
-La infraestructura fue diseñada para incorporar nuevas fuentes de información sin modificar su arquitectura.
-
-Posibles incorporaciones:
-
-- nuevas bases PostgreSQL;
-- servicios institucionales;
-- archivos de intercambio;
-- servicios geoespaciales;
-- otras fuentes compatibles con el modelo de integración.
+A partir de este punto el crecimiento del proyecto no depende de incorporar nuevas tecnologías sino de desarrollar nuevos productos.
 
 ---
 
-# Evolución de los modelos de información
+# Etapa 1 — Producto piloto
 
-Cada nuevo proyecto incorporará nuevos recursos especializados.
+## Producto 001
 
-Por ejemplo:
+**Padrón de Establecimientos Educativos**
 
-- establecimientos;
-- edificios;
-- organismos;
-- programas;
-- personas;
-- capas geográficas;
-- indicadores;
-- estadísticas.
+Objetivo:
 
-La incorporación de nuevos modelos no requiere modificar los existentes.
+Demostrar el ciclo completo de construcción de un producto institucional.
 
----
+Incluye:
 
-# Evolución de las APIs
+- integración de fuentes;
+- modelo lógico;
+- diccionario de datos;
+- vista SQL;
+- endpoint REST;
+- aplicación de referencia;
+- validación contra la publicación oficial.
 
-La API podrá crecer mediante nuevos endpoints organizados por dominio funcional.
-
-Cada recurso continuará publicándose a partir de vistas SQL dentro del schema `api`.
-
-La documentación OpenAPI continuará generándose automáticamente.
+Esta etapa constituye el MVP de LocalAPI.
 
 ---
 
-# Aplicaciones consumidoras
+# Etapa 2 — Consolidación
 
-Las aplicaciones cliente constituirán proyectos independientes de LocalAPI.
+Una vez finalizado el Producto 001 se completará la documentación metodológica del laboratorio.
 
-Ejemplos posibles:
+El objetivo consiste en consolidar un método reproducible para desarrollar nuevos productos.
 
-- visor cartográfico;
-- descarga de listados;
-- tableros de control;
-- aplicaciones móviles;
-- herramientas de análisis;
-- integraciones con otros sistemas.
-
-Todas ellas consumirán exclusivamente la API publicada por LocalAPI.
+La experiencia obtenida durante el MVP quedará incorporada a la documentación general del proyecto.
 
 ---
 
-# Calidad de los datos
+# Etapa 3 — Nuevos productos
 
-A medida que se incorporen nuevas fuentes podrán desarrollarse procesos destinados a:
+Con la metodología consolidada podrán desarrollarse nuevos productos reutilizando la infraestructura existente.
 
-- normalizar información;
-- validar consistencia;
-- enriquecer registros;
-- unificar dominios;
-- documentar reglas de integración.
+Entre los candidatos identificados se encuentran:
 
-Estas tareas continuarán implementándose dentro del modelo de información.
+- Padrón de Ofertas Educativas.
+- Padrón de Edificios.
+- Productos territoriales.
+- Productos estadísticos.
+- Productos cartográficos.
+
+Cada nuevo producto reutilizará:
+
+- la arquitectura;
+- la metodología;
+- la documentación;
+- la estrategia de publicación.
 
 ---
 
-# Comunidad de desarrollo
+# Evolución de la infraestructura
 
-La documentación, los modelos de información y los scripts SQL deberán mantenerse organizados para facilitar:
+La infraestructura actual fue diseñada para mantenerse estable.
 
-- incorporación de nuevos integrantes;
-- reutilización de componentes;
-- revisión técnica;
-- transferencia de conocimiento.
+No se prevén cambios significativos en:
 
-La documentación constituye un componente fundamental del proyecto.
+- PostgreSQL;
+- FDW;
+- PostgREST;
+- Swagger;
+- arquitectura de publicación.
+
+La evolución del proyecto ocurrirá principalmente en los modelos de información y no en la plataforma tecnológica.
+
+---
+
+# Evolución metodológica
+
+Cada producto construido permitirá mejorar la metodología de trabajo.
+
+Los principales componentes metodológicos son:
+
+- definición del producto;
+- identificación de las fuentes de verdad;
+- documentación de hallazgos;
+- decisiones de modelo;
+- diseño del modelo lógico;
+- construcción del diccionario de datos;
+- implementación mediante vistas SQL;
+- publicación;
+- validación.
+
+Cada nuevo desarrollo deberá recorrer este mismo proceso.
+
+---
+
+# Estado del MVP
+
+## Julio
+
+Objetivos:
+
+- completar la documentación del Producto 001;
+- implementar la vista SQL;
+- publicar el endpoint REST;
+- validar el resultado contra la publicación oficial.
+
+Resultado esperado:
+
+El Padrón de Establecimientos Educativos podrá consultarse mediante API.
+
+---
+
+## Agosto
+
+Objetivos:
+
+- desarrollar la aplicación de referencia;
+- incorporar descarga de datos;
+- incorporar visualización cartográfica;
+- implementar el primer corte histórico;
+- preparar la demostración institucional.
+
+Resultado esperado:
+
+Un usuario podrá abrir un navegador y:
+
+- consultar el padrón;
+- filtrarlo;
+- descargarlo;
+- consumirlo mediante API;
+- visualizarlo sobre un mapa.
+
+Con ello quedará demostrado el concepto de LocalAPI.
 
 ---
 
 # Visión
 
-LocalAPI busca consolidarse como una infraestructura liviana para diseñar, validar y publicar modelos de información reutilizables.
+El objetivo de LocalAPI no consiste en desarrollar una colección de APIs.
 
-Cada nuevo proyecto desarrollado sobre esta plataforma incrementará el conocimiento disponible y ampliará las capacidades del laboratorio sin alterar sus principios de funcionamiento.
+El objetivo consiste en construir una colección de productos de información institucionales, documentados, reutilizables y desacoplados de los sistemas que administran los datos.
+
+Cada nuevo producto incrementará el conocimiento acumulado por el laboratorio y reducirá el esfuerzo necesario para desarrollar los siguientes.
 
 ---
 
 # Resultado esperado
 
-LocalAPI deberá evolucionar incorporando nuevos dominios de información y nuevas aplicaciones consumidoras, manteniendo siempre la misma filosofía:
+Al finalizar el MVP, LocalAPI habrá demostrado que una arquitectura simple basada en PostgreSQL puede utilizarse para:
 
-- comprender el problema;
-- construir el modelo de información;
-- validar el resultado mediante un MVP;
-- publicar una API clara, estable y reutilizable.
+- integrar múltiples fuentes institucionales;
+- construir modelos de información;
+- publicar productos mediante APIs REST;
+- desarrollar aplicaciones consumidoras;
+- mantener documentación técnica y metodológica consistente.
+
+El Producto 001 constituirá la referencia para todos los desarrollos posteriores del laboratorio.

@@ -1,4 +1,4 @@
-# 001. Padrón de Establecimientos Educativos
+# Producto 001 — Padrón de Establecimientos Educativos
 
 > Producto desarrollado por **MAPA (UEICEE) + IA**
 
@@ -6,209 +6,232 @@
 
 # Objetivo
 
-El Padrón de Establecimientos Educativos constituye la publicación oficial del listado de establecimientos educativos de la Ciudad.
+El Producto 001 reconstruye la publicación oficial del **Padrón de Establecimientos Educativos** de la Ciudad Autónoma de Buenos Aires utilizando un modelo de información integrado.
 
-Integra información proveniente de distintos sistemas institucionales para ofrecer una representación única, consistente y reutilizable de cada establecimiento y sus localizaciones.
-
-Este producto constituye el primer MVP desarrollado sobre la infraestructura LocalAPI.
+Su desarrollo constituye el primer Producto Mínimo Viable (MVP) de LocalAPI y tiene como objetivo demostrar que es posible construir un producto institucional completo a partir de múltiples fuentes de información, respetando las responsabilidades de cada organismo y publicándolo mediante una arquitectura abierta basada en PostgreSQL y PostgREST.
 
 ---
 
 # Problema que resuelve
 
-La información necesaria para construir el padrón no reside en un único sistema.
+La información necesaria para construir el padrón oficial no reside en un único sistema.
 
-Actualmente intervienen diferentes fuentes de datos, administradas por áreas distintas, con responsabilidades específicas.
+Los datos educativos, postales, territoriales y geográficos son administrados por distintos organismos y aplicaciones, cada uno con responsabilidades específicas.
 
-LocalAPI integra dichas fuentes y genera una única publicación institucional, desacoplada de los sistemas que originan la información.
+Históricamente, la construcción del padrón implicó consultas complejas, transformaciones manuales y procesos de integración difíciles de documentar y reutilizar.
 
----
-
-# Conceptos fundamentales
-
-## Establecimiento Educativo
-
-Unidad institucional identificada por un **CUE**.
-
-Un establecimiento puede funcionar en una o más localizaciones.
+El Producto 001 reemplaza ese proceso mediante un modelo de información único, documentado y reproducible.
 
 ---
 
-## Localización
+# Alcance
 
-Unidad identificada por la combinación:
+El producto publica exclusivamente la información correspondiente al **Padrón de Establecimientos Educativos**.
 
-- CUE
-- Anexo
+Incluye:
 
-La combinación de ambos constituye un **CUEANEXO**.
+- identidad educativa;
+- identidad edilicia;
+- dirección postal;
+- información territorial;
+- información geográfica.
 
-Cada fila publicada por este producto representa una localización.
+No incluye:
 
----
-
-## Edificio
-
-Unidad edilicia identificada por un **CUI**.
-
-Un edificio puede albergar uno o más establecimientos educativos.
-
-Un establecimiento puede desarrollar sus actividades en uno o más edificios.
-
-La relación entre establecimientos y edificios constituye uno de los principales procesos de integración realizados por MAPA.
+- ofertas educativas;
+- dependencia funcional;
+- tipo de establecimiento;
+- indicadores;
+- estadísticas;
+- información correspondiente a otros productos institucionales.
 
 ---
 
 # Unidad de publicación
 
-Cada registro publicado representa:
+La unidad de publicación es el **CUEANEXO**.
 
-> **Una localización de un establecimiento educativo (CUE + Anexo), enriquecida con la información edilicia correspondiente (CUI).**
+Cada registro representa una localización (sede o anexo) de un establecimiento educativo.
 
-Esta unidad de publicación coincide con la utilizada en la publicación institucional vigente.
-
----
-
-# Fuentes de información
-
-## Padrón Nacional
-
-Aporta la identidad educativa del establecimiento.
-
-Entre otros datos:
-
-- CUE
-- Anexo
-- Nombre
-- Gestión
-- Nivel
-- Modalidad
-- Oferta educativa
-
-La información es incorporada mediante actualizaciones periódicas realizadas sobre una copia local.
+Sobre esa unidad se integran los atributos provenientes de las distintas fuentes de información.
 
 ---
 
-## RANIE
+# Modelo conceptual
 
-Aporta la identidad edilicia.
+El producto integra tres conceptos fundamentales.
 
-Entre otros datos:
+## Establecimiento
 
-- CUI
-- Coordenadas
-- Dirección
-- Barrio
-- Comuna
-- Distrito Escolar
-- Información de infraestructura
+Representa la unidad institucional identificada mediante un **CUE**.
 
-MAPA es responsable de la administración de esta información.
+Un establecimiento puede poseer una o más localizaciones.
 
 ---
 
-# Modelo de integración
+## Localización
 
-LocalAPI unifica ambas fuentes para construir un único modelo de información.
+Representa una sede o anexo.
 
-El consumidor desconoce el origen de cada dato.
+Se identifica mediante:
 
-La integración ocurre íntegramente dentro de PostgreSQL mediante vistas SQL.
+**CUE + Anexo**
 
----
-
-# Publicación vigente
-
-El producto mantiene permanentemente una versión actualizada que refleja el último estado conocido de las fuentes de información disponibles.
-
-Esta versión constituye la base para:
-
-- consultas;
-- aplicaciones;
-- mapas;
-- exportaciones;
-- servicios API.
+La combinación de ambos constituye el **CUEANEXO**, unidad de publicación del producto.
 
 ---
 
-# Publicaciones históricas
+## Edificio
 
-Durante el ciclo anual se realizan cortes oficiales del padrón en fechas acordadas entre las áreas usuarias.
+Representa la infraestructura física donde funcionan una o más localizaciones.
 
-Cada corte genera una publicación inmutable que preserva exactamente el estado del padrón en ese momento.
+Se identifica mediante un **CUI**.
 
-Estas publicaciones permiten:
-
-- realizar comparaciones temporales;
-- reproducir informes oficiales;
-- garantizar trazabilidad;
-- mantener consistencia estadística entre áreas.
-
-Los cortes históricos forman parte del producto y no constituyen copias de respaldo.
-
-Constituyen publicaciones oficiales.
+Cada edificio aporta los atributos territoriales y geográficos heredados por las localizaciones que contiene.
 
 ---
 
-# Consumidores
+# Integración
 
-Este producto podrá ser consumido por:
+El principal proceso realizado por el Producto 001 consiste en integrar la identidad educativa con la identidad edilicia.
 
-- aplicaciones web;
-- visores cartográficos;
-- procesos estadísticos;
-- tableros de control;
-- sistemas institucionales;
-- procesos de integración;
-- usuarios externos autorizados.
+La relación entre ambas fuentes se establece mediante:
 
-Todos ellos consumirán el mismo modelo de información.
+```
+padron_nacion.public.domicilio.cui
+```
+
+Este hallazgo constituye el punto de integración central del producto.
 
 ---
 
-# Formatos de publicación
+# Fuentes de verdad
 
-El mismo producto podrá publicarse mediante distintos formatos.
+Cada conjunto de información posee un único responsable institucional.
 
-- API REST
-- JSON
-- CSV
-- XLSX
-- GeoJSON
+| Dominio | Fuente |
+|---------|--------|
+| Identidad educativa | Padrón Nacional |
+| Dirección postal | Padrón Nacional |
+| Información territorial | UEICEE |
+| Información geográfica | UEICEE |
 
-Los formatos de salida no modifican el modelo de información.
+LocalAPI integra estas fuentes.
 
-Únicamente representan distintas formas de consumir el mismo producto.
+No administra información propia.
+
+---
+
+# Principios de diseño
+
+El Producto 001 fue desarrollado respetando los siguientes principios.
+
+## Una única fuente de verdad
+
+Cada atributo publicado posee un único sistema responsable de su administración.
+
+---
+
+## No duplicar responsabilidades
+
+Los procesos de carga permanecen en los sistemas que administran los datos.
+
+LocalAPI reutiliza esa información para construir un producto integrado.
+
+---
+
+## El modelo precede a la implementación
+
+Antes de escribir una vista SQL se documentan:
+
+- hallazgos;
+- decisiones de modelo;
+- diccionario de datos;
+- modelo lógico.
+
+La implementación constituye la última etapa del proceso.
+
+---
+
+## El Excel valida
+
+La publicación oficial constituye el mecanismo de validación del producto.
+
+No define su modelo de información.
+
+El modelo surge del análisis del dominio y de las responsabilidades institucionales.
+
+---
+
+# Documentación
+
+El Producto 001 se documenta mediante los siguientes archivos.
+
+| Documento | Finalidad |
+|-----------|-----------|
+| `README.md` | Presentación del producto |
+| `metadatos.md` | Información descriptiva y administrativa |
+| `hallazgos.md` | Conocimiento descubierto durante el análisis |
+| `decisiones_modelo.md` | Decisiones funcionales adoptadas |
+| `diccionario_de_datos.md` | Contrato público del producto |
+| `modelo_logico.md` | Modelo conceptual |
+| `vista_sql.md` | Implementación del modelo |
+| `endpoint.md` | Publicación mediante API REST |
+| `app.md` | Aplicación consumidora de referencia |
+| `snapshots.md` | Publicaciones históricas del padrón |
+
+---
+
+# Estado del desarrollo
+
+| Etapa | Estado |
+|--------|--------|
+| Definición conceptual | ✔ Finalizada |
+| Hallazgos | ✔ Finalizada |
+| Decisiones de modelo | ✔ Finalizada |
+| Metadatos | ✔ Finalizada |
+| Diccionario de datos | ✔ Finalizada |
+| Modelo lógico | ✔ Finalizada |
+| Vista SQL | En desarrollo |
+| Endpoint | Pendiente |
+| Aplicación de referencia | Pendiente |
+| Snapshots | Pendiente |
 
 ---
 
 # MVP
 
-La primera implementación tendrá como objetivo demostrar que es posible generar íntegramente este producto utilizando LocalAPI.
+El Producto 001 estará finalizado cuando un usuario pueda abrir un navegador y:
 
-El MVP deberá reemplazar el proceso actual de generación del listado publicado, manteniendo la misma calidad de información e incorporando las ventajas propias de una arquitectura basada en APIs.
+- consultar el padrón;
+- filtrarlo;
+- descargarlo;
+- consumirlo mediante API;
+- visualizarlo sobre un mapa.
 
----
+La infraestructura necesaria para ello ya se encuentra implementada.
 
-# Evolución prevista
-
-Una vez consolidado este producto podrán desarrollarse recursos derivados, entre ellos:
-
-- consultas por establecimiento;
-- consultas por edificio;
-- mapas interactivos;
-- indicadores;
-- series históricas;
-- servicios para otras aplicaciones.
-
-Todos ellos reutilizarán el mismo modelo de información construido para este producto.
+El trabajo restante consiste exclusivamente en completar el producto.
 
 ---
 
-# Estado
+# Productos futuros
 
-**En diseño.**
+El Producto 001 constituye la base metodológica para los desarrollos posteriores de LocalAPI.
 
-La definición conceptual del producto se encuentra finalizada.
+Entre los productos previstos se encuentran:
 
-La siguiente etapa consiste en diseñar el modelo de información que permitirá implementarlo mediante LocalAPI.
+- Padrón de Ofertas Educativas.
+- Padrón de Edificios.
+- Productos territoriales.
+- Productos estadísticos.
+
+Cada nuevo producto reutilizará la misma metodología, modificando únicamente el modelo de información correspondiente a su dominio.
+
+---
+
+# Resultado esperado
+
+Al finalizar el MVP, el Producto 001 reemplazará el proceso actual de construcción del Padrón de Establecimientos Educativos mediante un modelo de información documentado, reproducible y reutilizable.
+
+Su desarrollo constituye la primera demostración práctica de la metodología propuesta por LocalAPI y servirá como referencia para la construcción de los productos que lo sucedan.

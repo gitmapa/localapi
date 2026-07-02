@@ -127,6 +127,118 @@ La implementación del Producto 001 reemplaza ese proceso por una integración d
 
 ---
 
+# Decisión 009
+
+## La unidad de publicación es CUEANEXO
+
+El Producto 001 publica una única entidad.
+
+Cada registro representa una localización de un establecimiento educativo identificada mediante la combinación:
+
+- CUE;
+- Anexo.
+
+Todos los atributos publicados se organizan alrededor de esa unidad.
+
+---
+
+# Decisión 010
+
+## Cada atributo posee una única fuente de verdad
+
+Antes de incorporar un atributo al modelo debe identificarse el organismo responsable de administrarlo.
+
+No se admiten atributos mantenidos simultáneamente por distintas fuentes.
+
+Cuando exista más de una fuente para un mismo dato, el modelo deberá seleccionar una única fuente de verdad.
+
+---
+
+# Decisión 011
+
+## LocalAPI publica productos, no estructuras internas
+
+Las tablas, relaciones y consultas utilizadas para integrar la información constituyen detalles de implementación.
+
+El modelo publicado representa un producto de información diseñado para resolver una necesidad concreta.
+
+Las estructuras internas de las bases de datos no condicionan el diseño del producto.
+
+---
+
+# Decisión 012
+
+## El modelo precede a la implementación
+
+La implementación SQL no constituye una etapa de análisis.
+
+Antes de desarrollar una vista deben encontrarse documentados:
+
+- el objetivo del producto;
+- la unidad de publicación;
+- las fuentes de verdad;
+- los hallazgos;
+- las decisiones de modelo;
+- el diccionario de datos;
+- el modelo lógico.
+
+La implementación se limita a materializar esas decisiones.
+
+---
+
+# Decisión 013
+
+## El Excel oficial constituye la validación del producto
+
+La publicación institucional vigente se utiliza para verificar que el producto construido reproduce correctamente el resultado esperado.
+
+La estructura de la planilla no define el modelo de información.
+
+El modelo surge del análisis del dominio y de las responsabilidades institucionales.
+
+---
+
+# Decisión 014
+
+## Los dominios funcionales se publican como productos independientes
+
+La presencia de distintos dominios de información dentro de una misma publicación institucional no implica que deban formar parte de un mismo producto.
+
+El Producto 001 incorpora únicamente los atributos correspondientes al Padrón de Establecimientos Educativos.
+
+Otros dominios, como las ofertas educativas, deberán implementarse como productos independientes reutilizando la misma metodología.
+
+---
+
+# Decisión 015
+
+## Las transformaciones forman parte del modelo
+
+Las transformaciones realizadas por LocalAPI no modifican la información institucional.
+
+Su objetivo consiste en:
+
+- normalizar valores;
+- construir identificadores derivados;
+- adaptar formatos de publicación;
+- integrar información proveniente de distintas fuentes.
+
+Toda transformación aplicada deberá quedar documentada en el modelo y en el diccionario de datos.
+
+---
+
+# Decisión 016
+
+## La documentación forma parte del producto
+
+Cada producto desarrollado mediante LocalAPI debe poder comprenderse independientemente de su implementación técnica.
+
+La documentación constituye parte del producto y deberá mantenerse sincronizada con el modelo implementado.
+
+Las vistas SQL, los endpoints y las aplicaciones consumidoras deberán derivarse de la documentación y no a la inversa.
+
+---
+
 # Estado
 
-Las decisiones documentadas hasta el momento constituyen las reglas funcionales que deberán respetarse durante la construcción del modelo lógico y la implementación del Producto 001.
+Las decisiones documentadas constituyen las reglas funcionales que deberán respetarse durante la implementación del Producto 001 y servirán como base metodológica para los productos que se desarrollen posteriormente mediante LocalAPI.
